@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máquina de Café</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            background-image: url("https://images.unsplash.com/photo-1556740767-414a9c4860c1?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        }
+        .container {
+    background-color: rgb(131, 93, 55);
+    width: 400px;
+    height: 620px; 
+    padding: 30px; 
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5px; 
+}
+
+        button {
+            margin-top: 10px;
+        }
+
+        #caf{
+            display: block;
+            margin: 0 auto; 
+            width: 250px; 
+            height: auto;
+            border-radius: 50% 
+        }
+
+        #btn{
+            font-size: 20px;
+            border-radius: 5px;
+            height: 200px;
+            width: 200px;
+            background-color: rgb(255, 255, 255);
+        }
+
+        #btn:hover{
+            background-color:  rgb(131, 93, 55);
+            color: black;
+        }
+    </style>
+</head>
+<body>
+ 
+
+    <div class="container">
+        <h2>Máquina de Café</h2>
+        <img id="caf"  src="https://media.istockphoto.com/id/1039745550/es/vector/plantilla-de-dise%C3%B1o-vectorial-caf%C3%A9-amor.jpg?s=612x612&w=0&k=20&c=X7TGDG1msao0Afv28NxZQYNSqec4XnrM_PfT-D9zyV8=" alt="">
+        <label for="tamano">Tamaño del café:</label>
+        <select id="tamano">
+            <option value="pequeno">Pequeño (3oz)</option>
+            <option value="mediano">Mediano (5oz)</option>
+            <option value="grande">Grande (7oz)</option>
+        </select>
+        <br><br>
+        <label for="azucar">Cucharadas de azúcar:</label>
+        <input type="number" id="azucar" min="0" value="0">
+        <br><br>
+        <button id="btn" onclick="servirCafe()">Servir Café</button>
+        <p id="mensaje"></p>
+    </div>
+
+    <script>
+        let vasos = 10, cafe = 50, azucar = 20;
+        function servirCafe() {
+            const tamanos = { "pequeno": 3, "mediano": 5, "grande": 7 };
+            let tamano = document.getElementById("tamano").value;
+            let cantidadAzucar = parseInt(document.getElementById("azucar").value);
+            let mensaje = "";
+            
+            if (vasos <= 0) {
+                mensaje = "No hay vasos disponibles";
+            } else if (cafe < tamanos[tamano]) {
+                mensaje = "No hay suficiente café";
+            } else if (azucar < cantidadAzucar) {
+                mensaje = "No hay suficiente azúcar";
+            } else {
+                vasos--;
+                cafe -= tamanos[tamano];
+                azucar -= cantidadAzucar;
+                mensaje = `Sirviendo café ${tamano} con ${cantidadAzucar} cucharadas de azúcar`;
+            }
+            
+            document.getElementById("mensaje").innerText = mensaje;
+        }
+    </script>
+</body>
+</html>
